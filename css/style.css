@@ -6,11 +6,10 @@
   --paper: #faf6f1;
   --card: #ffffff;
   --line: #e9e1d8;
-  --accent: hsl(9 100% 58%);
-  --accent-2: hsl(35 95% 55%);
-  --grad: linear-gradient(135deg, hsl(9 100% 58%), hsl(35 95% 55%));
-  --tint-warm: hsl(32 44% 93%);
-  --tint-res: hsl(18 40% 93%);
+  --accent: #1b4332;
+  --spark: #c0562f;
+  --tint-warm: hsl(32 40% 93%);
+  --tint-soft: hsl(30 25% 90%);
   --radius: 20px;
   --wrap: 1120px;
 }
@@ -81,9 +80,8 @@ section { scroll-margin-top: 84px; }
 .btn:hover { opacity: .88; }
 .btn:active { transform: translateY(1px); }
 .btn-primary {
-  background: var(--grad);
+  background: var(--accent);
   color: #fff;
-  box-shadow: 0 8px 24px -8px hsl(9 100% 50% / .55);
 }
 .btn-ghost {
   background: transparent;
@@ -243,7 +241,7 @@ section { scroll-margin-top: 84px; }
 .device {
   background: #17130f;
   padding: 10px;
-  box-shadow: 0 30px 60px -25px rgb(33 26 21 / .45);
+  box-shadow: 0 24px 48px -28px rgb(33 26 21 / .35);
 }
 .device .screen {
   background: #fff;
@@ -266,7 +264,7 @@ section { scroll-margin-top: 84px; }
 
 /* phone screen: menu */
 .m-hero {
-  background: var(--grad);
+  background: var(--accent);
   color: #fff;
   padding: 26px 16px 16px;
   text-align: center;
@@ -283,16 +281,18 @@ section { scroll-margin-top: 84px; }
   border-radius: 999px;
 }
 .m-hero--photo {
-  background: linear-gradient(160deg, hsl(30 55% 88%), hsl(18 60% 80%));
+  background: var(--tint-soft);
+  color: var(--ink);
   min-height: 74px;
 }
+.m-hero--photo p { color: var(--ink-soft); opacity: 1; }
 .m-dish-tag {
   font-size: .6rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .08em;
-  background: rgb(255 255 255 / .6);
-  color: var(--ink);
+  background: var(--spark);
+  color: #fff;
   padding: 3px 8px;
   border-radius: 999px;
 }
@@ -343,7 +343,7 @@ section { scroll-margin-top: 84px; }
 
 .m-cta {
   margin: 0 14px 14px;
-  background: var(--grad);
+  background: var(--accent);
   color: #fff;
   font-size: .8rem;
   font-weight: 700;
@@ -407,7 +407,7 @@ section { scroll-margin-top: 84px; }
   color: var(--ink);
 }
 .r-slots span.is-active {
-  background: var(--grad);
+  background: var(--accent);
   border-color: transparent;
   color: #fff;
 }
@@ -434,7 +434,7 @@ section { scroll-margin-top: 84px; }
 
 .r-cta {
   margin: auto 20px 20px;
-  background: var(--grad);
+  background: var(--accent);
   color: #fff;
   font-weight: 700;
   text-align: center;
@@ -464,7 +464,8 @@ section { scroll-margin-top: 84px; }
 
 /* ── feature sections ────────────────────────────────────── */
 
-.feature { padding: 72px 0; }
+.feature { padding: 72px 0; background: var(--card); }
+.feature--flip { background: var(--paper); }
 .feature-grid {
   display: grid;
   grid-template-columns: 1.05fr .95fr;
@@ -499,7 +500,7 @@ section { scroll-margin-top: 84px; }
 
 .steps {
   padding: 64px 0;
-  background: var(--tint-warm);
+  background: var(--card);
 }
 .steps h2 { text-align: center; }
 .steps-grid {
@@ -520,7 +521,7 @@ section { scroll-margin-top: 84px; }
   width: 36px;
   height: 36px;
   border-radius: 999px;
-  background: var(--grad);
+  background: var(--accent);
   color: #fff;
   font-weight: 800;
   margin-bottom: 14px;
@@ -550,15 +551,15 @@ section { scroll-margin-top: 84px; }
   padding: 28px;
 }
 .plan--featured {
-  border: 2px solid var(--accent);
-  box-shadow: 0 24px 48px -24px hsl(9 100% 50% / .4);
+  border: 1px solid var(--accent);
 }
 .plan-tag {
   position: absolute;
   top: -13px;
   right: 20px;
-  background: var(--grad);
-  color: #fff;
+  background: var(--card);
+  color: var(--spark);
+  border: 1.5px solid var(--spark);
   font-size: .72rem;
   font-weight: 700;
   padding: 4px 12px;
@@ -617,7 +618,7 @@ section { scroll-margin-top: 84px; }
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.2rem;
-  color: var(--accent);
+  color: var(--spark);
 }
 .faq-list details[open] summary::after { content: "−"; }
 .faq-list details p {
@@ -630,16 +631,15 @@ section { scroll-margin-top: 84px; }
 /* ── final cta ───────────────────────────────────────────── */
 
 .final-cta {
-  background: var(--grad);
+  background: var(--accent);
   color: #fff;
   padding: 72px 0;
   text-align: center;
 }
-.final-cta p { opacity: .92; }
+.final-cta p { opacity: .9; }
 .final-cta .btn {
   background: #fff;
   color: var(--ink);
-  box-shadow: 0 12px 28px -10px rgb(0 0 0 / .35);
 }
 
 /* ── footer ──────────────────────────────────────────────── */
