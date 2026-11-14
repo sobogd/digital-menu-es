@@ -1,35 +1,33 @@
-# digital-menu-es
+# digital-menu (QRgine / Коргин)
 
-Лендинг нового продукта: QR-меню + резервации. Только HTML + CSS, **ноль JS**, один язык — испанский. Один файл `index.html`, весь дизайн (мок-апы телефона/планшета, формы FAQ, мобильное меню) — чистый CSS.
+Русскоязычный SEO-лендинг: QR-меню + резервации + заказы/KDS. Статика, ноль JS.
+Продукт и админка — репо `iq-rest` (база, дашборд, PWA); брендинг QRgine.
 
-## Файлы
+## Структура
 
-- `index.html` — вся страница
-- `css/style.css` — все стили
-- `nginx/digital-menu-es.conf` — nginx vhost для VPS (`listen 8080`), ставится один раз
-- `deploy.sh` — деплой на VPS (паттерн `iq-translate/deploy.sh`)
+- `seo/config.py` — бренд, BASE_URL, модули/цены, группы. Смена имени или базы = правка здесь + генерация.
+- `seo/templates.py` — шаблоны (head/header/footer/JSON-LD/страницы).
+- `seo/gen.py` — генератор: `python3 seo/gen.py`
+- `seo/data/**.json` — весь контент: home, ceny, faq, hubs + группы
+  `types/` (10), `features/` (10), `cities/` (15), `articles/` (8), `trust/` (4)
+- Сгенерированное (коммитится): `index.html`, `<slug>/index.html` × 51, 4 хаба, `sitemap.xml`, `robots.txt`
+- `assets/logo.svg` — знак (корги с QR-ушком), `assets/wordmark.svg` — знак + текст
+
+## Генерация
+
+```bash
+python3 seo/gen.py   # пересобирает все 54 страницы + sitemap + robots
+```
+
+Список страниц — в `sitemap.xml`. Canonical-базу меняют в `seo/config.py:BASE_URL` (сейчас IP:8080, домен появится — одна строка).
 
 ## Деплой
 
-Разовая подготовка на VPS:
+Виде прежнего: `bash deploy.sh` (lock → git pull → rsync на VPS → health :8080).
+nginx vhost — `nginx/digital-menu-es.conf` (try_files $uri $uri/ — чистые URL без .html).
 
-```bash
-ssh deployer@46.225.143.221
-sudo mkdir -p /home/deploy/apps/digital-menu-es
-# скопировать nginx/digital-menu-es.conf в sites-available + symlink в sites-enabled
-sudo nginx -t && sudo systemctl reload nginx
-```
+## Ссылки на продукт
 
-Дальше с Mac:
-
-```bash
-bash deploy.sh
-```
-
-Смотреть: http://46.225.143.221:8080/
-
-`deploy.sh`: lock → git pull → dirty-guard (FORCE=1) → rsync на VPS → health-check `:8080` → state-файл `~/Library/Logs/digital-menu-es.applied`.
-
-## Статус
-
-Каркас: hero, 4 benefit-карточки, секции Menú / Reservas с CSS-мок-апами, «como funciona», Precios (2 плана), FAQ (`<details>`), final CTA, footer. Тексты — placeholder. Лид-форма и живое демо пока не делаются.
+- Sign-up: https://dashboard.iq-rest.com
+- Демо-меню: https://love-eatery.iq-rest.com
+- Юр. страницы: iq-rest.com/ru/{terms,privacy,cookies}
