@@ -596,6 +596,9 @@ section { scroll-margin-top: 84px; }
 .plan .btn { width: 100%; }
 .pricing-note { font-size: .82rem; color: var(--ink-soft); margin: 20px 0 0; }
 
+.plan-grid { display: flex; justify-content: center; }
+.plan--solo { max-width: 430px; width: 100%; }
+
 @media (max-width: 680px) { .pricing-grid { grid-template-columns: 1fr; } }
 
 /* ── faq ─────────────────────────────────────────────────── */
@@ -744,33 +747,6 @@ section { scroll-margin-top: 84px; }
 }
 @media (max-width: 680px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
 
-/* ── module table (pricing) ─────────────────────────────── */
-
-.module-table { margin: 24px 0 16px; }
-.module-row {
-  display: grid;
-  grid-template-columns: 220px 1fr 120px;
-  gap: 16px;
-  align-items: baseline;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-}
-.module-row.module-head {
-  font-size: .78rem;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  color: var(--ink-soft);
-  border-bottom: 1px solid var(--line);
-}
-.module-name { font-weight: 650; }
-.module-desc { color: var(--ink-soft); font-size: .92rem; }
-.module-price { font-weight: 700; text-align: right; white-space: nowrap; }
-.module-price small { font-weight: 400; color: var(--ink-soft); }
-@media (max-width: 680px) {
-  .module-row { grid-template-columns: 1fr 110px; }
-  .module-desc { grid-column: 1 / -1; order: 3; }
-}
-
 /* ── related / hub grids ────────────────────────────────── */
 
 .related { padding: 40px 0; }
@@ -829,21 +805,6 @@ section { scroll-margin-top: 84px; }
 .ai-band { background: var(--accent); color: #fff; padding: 48px 0; }
 .ai-band h2, .ai-band p { margin: 0 auto; max-width: 720px; }
 .ai-band p { opacity: .92; }
-
-/* ── KDS mockup ─────────────────────────────────────────── */
-
-.kds-screen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px; }
-.kds-col { display: flex; flex-direction: column; gap: 8px; }
-.kds-head { font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
-.kds-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: .82rem;
-  font-weight: 550;
-}
-.kds-card.is-new { border-color: var(--spark); background: var(--tint-warm); }
 
 /* ── link-more ──────────────────────────────────────────── */
 

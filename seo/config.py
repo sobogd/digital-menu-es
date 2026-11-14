@@ -5,22 +5,21 @@ BRAND_LATIN = "QRgine"
 BRAND_RU = "Коргин"
 BRAND_TAGLINE = "Цифровые меню с QR для ресторанов"
 BRAND_DESC = ("QRgine (Коргин) — сервис цифровых меню с QR-кодом: гость сканирует код на столе, "
-              "открывает меню в браузере на своём языке и заказывает или бронирует стол. "
-              "Запуск за 14 дней бесплатно, без карты.")
+              "открывает меню в браузере на своём языке и бронирует стол. "
+              "Один тариф, всё включено: 14 дней бесплатно, без карты.")
 
 BASE_URL = "http://46.225.143.221:8080"
 YEAR = "2026"
 LASTMOD = "2026-11-14"
 
-SIGNUP_URL = "https://dashboard.iq-rest.com"
-DEMO_URL = "https://love-eatery.iq-rest.com"
-PRODUCT_SITE = "https://iq-rest.com/ru"
+# Вход и демо — пока заглушки.
+SIGNUP_URL = "#"
+DEMO_URL = "#"
 LEGAL = {
-    "offer": "https://iq-rest.com/ru/terms",
-    "privacy": "https://iq-rest.com/ru/privacy",
-    "cookies": "https://iq-rest.com/ru/cookies",
+    "offer": "#",
+    "privacy": "#",
+    "cookies": "#",
 }
-SUPPORT_URL = "https://iq-rest.com/ru"
 
 GROUPS = {
     "types": {
@@ -36,13 +35,6 @@ GROUPS = {
         "plural": "функций",
         "related_h2": "Другие функции",
         "hub_title": "Функции QRgine: меню, брони, заказы, KDS",
-    },
-    "cities": {
-        "name": "Города",
-        "path": "goroda",
-        "plural": "городов",
-        "related_h2": "Меню в других городах",
-        "hub_title": "Цифровое меню в городах России",
     },
     "articles": {
         "name": "Статьи",
@@ -60,14 +52,9 @@ GROUPS = {
     },
 }
 
-# Модули и цены (годовая оплата, EUR, за ресторан в месяц).
-MODULES = [
-    {"key": "menu", "name": "QR-меню", "price": "9,90",
-     "desc": "Меню с фото и аллергенами, AI-перевод на 35 языков, обновления в реальном времени."},
-    {"key": "reservations", "name": "+ Бронирование столов", "price": "7,00",
-     "desc": "Гости бронируют из того же QR. Агenda, ваши правила, подтверждение автоматически."},
-    {"key": "orders", "name": "+ Заказы и кухонный дисплей", "price": "11,00",
-     "desc": "Заказ из меню приходит официанту, в WhatsApp или прямо на кухню. KDS-экран."},
-    {"key": "domain", "name": "+ Свой домен для меню", "price": "4,00",
-     "desc": "Меню открывается на вашем домене, а не на нашем."},
-]
+# Единственный тариф: всё включено (QR-меню + бронирование), за ресторан в месяц.
+PLAN = {
+    "annual": "7,00",
+    "monthly": "9,00",
+    "currency": "€",
+}

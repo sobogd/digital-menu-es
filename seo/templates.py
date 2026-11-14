@@ -60,9 +60,8 @@ def org_jsonld():
   "alternateName": "%s",
   "url": "%s/",
   "logo": "%s/assets/logo.svg",
-  "description": "%s",
-  "sameAs": ["%s"]
-}''' % (C.BRAND_LATIN, C.BRAND_RU, C.BASE_URL, C.BASE_URL, esc(C.BRAND_DESC).replace('"', "'"), C.PRODUCT_SITE)
+  "description": "%s"
+}''' % (C.BRAND_LATIN, C.BRAND_RU, C.BASE_URL, C.BASE_URL, esc(C.BRAND_DESC).replace('"', "'"))
 
 
 def breadcrumb_items(items):
@@ -110,7 +109,6 @@ def header():
     nav = '''<nav class="nav-desktop" aria-label="Основная навигация">
       <a href="/funktsii/">Функции</a>
       <a href="/dlya-kogo/">Для кого</a>
-      <a href="/goroda/">Города</a>
       <a href="/statyi/">Статьи</a>
       <a href="/ceny/">Цены</a>
       <a href="/faq/">FAQ</a>
@@ -118,7 +116,6 @@ def header():
     drop = '''<nav class="nav-drop" aria-label="Основная навигация">
       <a href="/funktsii/">Функции</a>
       <a href="/dlya-kogo/">Для кого</a>
-      <a href="/goroda/">Города</a>
       <a href="/statyi/">Статьи</a>
       <a href="/ceny/">Цены</a>
       <a href="/faq/">FAQ</a>
@@ -148,16 +145,13 @@ def footer():
   <div class="wrap footer-grid">
     <div class="footer-brand">
       {logo_svg(40)}{wordmark()}
-      <p>{esc(C.BRAND_TAGLINE)}. Запуск за 14 дней бесплатно, без карты.</p>
-      <p class="footer-contacts">Продукт: <a href="{C.PRODUCT_SITE}">{esc(C.BRAND_LATIN)} · iq-rest.com</a></p>
+      <p>{esc(C.BRAND_TAGLINE)}. Один тариф, всё включено: 14 дней бесплатно, без карты.</p>
     </div>
     <nav class="footer-col" aria-label="Функции">
       <h3>Функции</h3>
       <a href="/rezervy-online-bez-zvonkov/">Бронирование онлайн</a>
       <a href="/mnogoiazychnoe-menyu/">Мультиязычное меню</a>
       <a href="/alergeny-v-menyu/">Аллергены в меню</a>
-      <a href="/kuhonnyi-displey/">Кухонный дисплей</a>
-      <a href="/zakazy-iz-menyu/">Заказы из меню</a>
       <a href="/ceny/">Цены</a>
     </nav>
     <nav class="footer-col" aria-label="Для кого">
@@ -167,14 +161,6 @@ def footer():
       <a href="/menyu-digital-dlya-bara/">Бар</a>
       <a href="/menyu-digital-dlya-otelya/">Отель</a>
       <a href="/dlya-kogo/">Все заведения <span aria-hidden="true">→</span></a>
-    </nav>
-    <nav class="footer-col" aria-label="Города">
-      <h3>Города</h3>
-      <a href="/menyu-digital-v-moskve/">Москва</a>
-      <a href="/menyu-digital-v-s-peterburge/">Санкт-Петербург</a>
-      <a href="/menyu-digital-v-kazani/">Казань</a>
-      <a href="/menyu-digital-v-novosibirske/">Новосибирск</a>
-      <a href="/goroda/">Все города <span aria-hidden="true">→</span></a>
     </nav>
     <nav class="footer-col" aria-label="Статьи и помощь">
       <h3>Статьи и помощь</h3>
@@ -227,10 +213,9 @@ def cta_band():
     return f'''<section class="final-cta">
   <div class="wrap">
     <h2>Запустите меню за 14 дней бесплатно</h2>
-    <p>Карта не нужна. Для старта — только email. Демо: <a href="{C.DEMO_URL}">открыть меню-демо</a>.</p>
+    <p>Карта не нужна. Всё включено: QR-меню и бронирование — один тариф.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
-      <a class="btn btn-ghost" href="{C.DEMO_URL}">Открыть демо</a>
     </div>
   </div>
 </section>'''

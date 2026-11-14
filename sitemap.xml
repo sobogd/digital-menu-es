@@ -106,91 +106,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://46.225.143.221:8080/kuhonnyi-displey/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/zakazy-iz-menyu/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-s-peterburge/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-moskve/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-novosibirske/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-ekaterinburge/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-kazani/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-nizhnem-novgorode/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-krasnodare/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-rostove-na-donu/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-samare/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-ufe/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-omsk/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-cheliane/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-krasnoyarske/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-permi/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/menyu-digital-v-volgograde/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://46.225.143.221:8080/chto-takoe-menyu-digitalnoe/</loc>
     <lastmod>2026-11-14</lastmod>
     <priority>0.7</priority>
@@ -257,11 +172,6 @@
   </url>
   <url>
     <loc>http://46.225.143.221:8080/funktsii/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>http://46.225.143.221:8080/goroda/</loc>
     <lastmod>2026-11-14</lastmod>
     <priority>0.8</priority>
   </url>

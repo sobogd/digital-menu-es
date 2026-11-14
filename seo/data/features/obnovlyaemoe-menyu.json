@@ -52,5 +52,5 @@
     {"q": "Что гость увидит, если блюдо закончилось?", "a": "Позиция остаётся в меню с пометкой о недоступности — она не исчезает. Гость понимает, что это временно, и выбирает другое блюдо."},
     {"q": "Можно ли быстро вернуть позицию после «распродано»?", "a": "Да. Отметка ставится и снимается в один клик из панели — без правки самой позиции и без уведомления гостей."}
   ],
-  "related_slugs": ["odin-qr-za-restoran", "menyu-s-fotografiami", "alergeny-v-menyu", "rezervy-online-bez-zvonkov", "kuhonnyi-displey", "ceny"]
+  "related_slugs": ["odin-qr-za-restoran", "menyu-s-fotografiami", "alergeny-v-menyu", "rezervy-online-bez-zvonkov", "mnogoiazychnoe-menyu", "ceny"]
 }

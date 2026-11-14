@@ -72,22 +72,35 @@ def render_home():
         f'<li><h3>{esc2(x["h3"])}</h3><p>{esc2(x["p"])}</p></li>' for x in d["menu"])
     resa_items = "".join(
         f'<li><h3>{esc2(x["h3"])}</h3><p>{esc2(x["p"])}</p></li>' for x in d["reservations"])
-    kds_items = "".join(
-        f'<li><h3>{esc2(x["h3"])}</h3><p>{esc2(x["p"])}</p></li>' for x in d["kds"])
     steps = "".join(
         f'<div class="step"><span class="step-num">{i + 1}</span><h3>{esc2(s["h3"])}</h3><p>{esc2(s["p"])}</p></div>'
         for i, s in enumerate(d["steps"]))
-    offers = []
-    for o in C.MODULES:
-        offers.append(f'<div class="module-row"><div class="module-name">{esc2(o["name"])}</div>'
-                      f'<div class="module-desc">{esc2(o["desc"])}</div>'
-                      f'<div class="module-price">{esc2(o["price"])} €<small>/мес</small></div></div>')
-    offers_html = "".join(offers)
+    plan_html = f"""<div class="plan-grid">
+      <div class="plan plan--featured plan--solo">
+        <span class="plan-tag">Всё включено</span>
+        <h3>QR-меню + Бронирование</h3>
+        <p class="plan-price">{esc2(C.PLAN["annual"])} €<small>/мес</small></p>
+        <p class="plan-alt">при годовой оплате · {esc2(C.PLAN["monthly"])} € при помесячной</p>
+        <ul>
+          <li>Меню с фото, аллергенами и 35 языками</li>
+          <li>Бронирование столов из того же QR</li>
+          <li>Обновления без замены QR-кода</li>
+          <li>Ваш логотип и цвета</li>
+        </ul>
+        <a class="btn btn-primary" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
+      </div>
+    </div>"""
+    offers_html = plan_html
 
     import json as _json
-    app_offer = [{"@type": "Offer", "name": o["name"], "price": o["price"].replace(",", "."),
-                  "priceCurrency": "EUR", "availability": "https://schema.org/InStock",
-                  "url": C.BASE_URL + "/ceny/"} for o in C.MODULES]
+    app_offer = [
+        {"@type": "Offer", "name": "Всё включено: QR-меню + бронирование, годовая оплата",
+         "price": C.PLAN["annual"].replace(",", "."), "priceCurrency": "EUR",
+         "availability": "https://schema.org/InStock", "url": C.BASE_URL + "/ceny/"},
+        {"@type": "Offer", "name": "Всё включено: QR-меню + бронирование, помесячная оплата",
+         "price": C.PLAN["monthly"].replace(",", "."), "priceCurrency": "EUR",
+         "availability": "https://schema.org/InStock", "url": C.BASE_URL + "/ceny/"},
+    ]
     ld = [
         T.org_jsonld(),
         _json.dumps({"@context": "https://schema.org", "@type": "WebSite",
@@ -99,8 +112,7 @@ def render_home():
                      "url": C.BASE_URL + "/", "offers": app_offer,
                      "publisher": {"@type": "Organization", "name": C.BRAND_LATIN},
                      "featureList": ["QR-меню с фото и аллергенами", "AI-перевод на 35 языков",
-                                     "Бронирование столов из QR", "Приём заказов и кухонный дисплей",
-                                     "Обновление меню без замены QR"],
+                                     "Бронирование столов из QR", "Обновление меню без замены QR"],
                      "description": C.BRAND_DESC}, ensure_ascii=False),
         T.faq_jsonld(d["faq"]),
         T.breadcrumb_jsonld([("", "")]),
@@ -124,7 +136,6 @@ def render_home():
         <p class="lead">{esc2(d["lead"])}</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
-          <a class="btn btn-ghost" href="{C.DEMO_URL}">Открыть демо</a>
         </div>
         <p class="hero-note">{esc2(d["hero_note"])}</p>
       </div>
@@ -179,7 +190,7 @@ def render_home():
             <div class="m-detail">
               <p>Грибы, сливки, пармезан. Сметана и пампушка в комплекте.</p>
               <p class="m-allergens">Аллергены: глютен (G), молочные продукты (D)</p>
-              <div class="m-price-row"><span class="m-price m-price--big">850 ₽</span><span class="m-add"><span>В заказ</span></span></div>
+              <div class="m-price-row"><span class="m-price m-price--big">850 ₽</span><span class="m-add"><span>Бронировать стол</span></span></div>
             </div>
           </div>
         </div>
@@ -209,25 +220,6 @@ def render_home():
     </div>
   </section>
 
-  <section id="kds" class="feature">
-    <div class="wrap feature-grid">
-      <div class="feature-copy">
-        <h2>{esc2(d["kds_h2"])}</h2>
-        <p>{esc2(d["kds_lead"])}</p>
-        <ul class="bullet-list">{kds_items}</ul>
-        <a class="link-more" href="/kuhonnyi-displey/">Подробнее о KDS <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="feature-device">
-        <div class="device tablet" role="img" aria-label="Кухонный дисплей с заказами">
-          <div class="screen kds-screen">
-            <div class="kds-col"><span class="kds-head">Гриль · 3</span><span class="kds-card">12 · Ризотто ×2</span><span class="kds-card is-new">13 · Сырники</span></div>
-            <div class="kds-col"><span class="kds-head">Бар · 2</span><span class="kds-card">14 · Мохито</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="ai-band">
     <div class="wrap">
       <h2>{esc2(d["ai_h2"])}</h2>
@@ -245,12 +237,9 @@ def render_home():
   <section id="tsenyi" class="pricing">
     <div class="wrap">
       <h2>Цены</h2>
-      <p class="pricing-sub">Модульная цена за ресторан, без комиссии с заказов. Годовая оплата.</p>
-      <div class="module-table">
-        <div class="module-row module-head"><div class="module-name">Модуль</div><div class="module-desc">Что входит</div><div class="module-price">Цена</div></div>
-        {offers_html}
-      </div>
-      <p class="pricing-note">Годовая оплата ≈ −30% к помесячной. Скидки за объём до 50% при 5+ ресторанах. Полный разбор — на странице <a href="/ceny/">«Цены»</a>.</p>
+      <p class="pricing-sub">Один тариф за ресторан — всё включено: QR-меню и бронирование.</p>
+      {offers_html}
+      <p class="pricing-note">14 дней бесплатно, карта не нужна. Отмена в любой момент. Всё, что нужно знать о цене, — на странице <a href="/ceny/">«Цены»</a>.</p>
     </div>
   </section>
 
@@ -285,24 +274,38 @@ def esc2(s):
 def render_ceny():
     d = DATA["__ceny"]
     path = "/ceny"
-    rows = []
-    for o in C.MODULES:
-        rows.append(f'<div class="module-row"><div class="module-name">{T.esc(o["name"])}</div>'
-                    f'<div class="module-desc">{T.esc(o["desc"])}</div>'
-                    f'<div class="module-price">{T.esc(o["price"])} €<small>/мес</small></div></div>')
-    rows_html = "".join(rows)
+    rows_html = f"""<div class="plan-grid">
+      <div class="plan plan--featured plan--solo">
+        <span class="plan-tag">Всё включено</span>
+        <h3>QR-меню + Бронирование</h3>
+        <p class="plan-price">{T.esc(C.PLAN["annual"])} €<small>/мес</small></p>
+        <p class="plan-alt">при годовой оплате · {T.esc(C.PLAN["monthly"])} € при помесячной</p>
+        <ul>
+          <li>Меню с фото, аллергенами и 35 языками</li>
+          <li>Бронирование столов из того же QR</li>
+          <li>Обновления без замены QR-кода</li>
+          <li>Ваш логотип и цвета</li>
+        </ul>
+        <a class="btn btn-primary" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
+      </div>
+    </div>"""
+    offer = [
+        {"@type": "Offer", "name": "Всё включено: QR-меню + бронирование, годовая оплата",
+         "price": C.PLAN["annual"].replace(",", "."), "priceCurrency": "EUR"},
+        {"@type": "Offer", "name": "Всё включено: QR-меню + бронирование, помесячная оплата",
+         "price": C.PLAN["monthly"].replace(",", "."), "priceCurrency": "EUR"},
+    ]
     import json as _json
-    offer = [{"@type": "Offer", "name": o["name"], "price": o["price"].replace(",", "."),
-              "priceCurrency": "EUR"} for o in C.MODULES]
     ld = [T.org_jsonld(),
           T.breadcrumb_jsonld([("", ""), ("Цены", "/ceny")]),
           T.webpage_jsonld(d["title"], d["metaDescription"], path),
           T.faq_jsonld(d["faq"]),
           _json.dumps({"@context": "https://schema.org", "@type": "Product",
-                       "name": C.BRAND_LATIN + " — модули", "description": d["metaDescription"],
+                       "name": C.BRAND_LATIN + " — всё включено", "description": d["metaDescription"],
                        "url": C.BASE_URL + "/ceny/", "brand": {"@type": "Brand", "name": C.BRAND_LATIN},
                        "offers": {"@type": "AggregateOffer", "priceCurrency": "EUR",
-                                  "lowPrice": "9.90", "highPrice": "31.90",
+                                  "lowPrice": C.PLAN["annual"].replace(",", "."),
+                                  "highPrice": C.PLAN["monthly"].replace(",", "."),
                                   "offerCount": str(len(offer)), "offers": offer}}, ensure_ascii=False)]
     ld_html = "\n".join(f'<script type="application/ld+json">{x}</script>' for x in ld)
     crumbs_html = T.breadcrumbs([("", ""), ("Цены", "/ceny")])
@@ -322,10 +325,7 @@ def render_ceny():
   <div class="wrap prose">
     <h1>{T.esc(d["h1"])}</h1>
     {intro}
-    <div class="module-table">
-      <div class="module-row module-head"><div class="module-name">Модуль</div><div class="module-desc">Что входит</div><div class="module-price">Цена</div></div>
-      {rows_html}
-    </div>
+    {rows_html}
     {sections}
   </div>
   {T.faq_block(d["faq"], "Вопросы о ценах")}
@@ -450,10 +450,10 @@ def main():
             rel = write(f"{p['slug']}/index.html",
                         T.render_page(p, related_for(p, pages)))
             written.append(rel)
-            prio = "0.6" if g in ("types", "features", "cities") else "0.7"
+            prio = "0.6" if g in ("types", "features") else "0.7"
             sitemap.append(("/" + p["slug"], prio))
 
-    for g in ("types", "features", "cities", "articles"):
+    for g in ("types", "features", "articles"):
         hub = write(f"{C.GROUPS[g]['path']}/index.html", render_hub(g, by_group.get(g, [])))
         written.append(hub)
         sitemap.append(("/" + C.GROUPS[g]["path"], "0.8"))
