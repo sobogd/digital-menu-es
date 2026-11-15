@@ -31,7 +31,7 @@ def logo_svg(size=32):
 
 
 def wordmark():
-    return '<span class="wordmark"><b>qr</b><i>gi</i></span>'
+    return '<span class="wordmark"><b>QR</b><i>gi</i></span>'
 
 
 def head(title, description, path, og_type="website"):
