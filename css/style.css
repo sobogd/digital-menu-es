@@ -108,6 +108,22 @@ section { scroll-margin-top: 84px; }
   height: 64px;
 }
 
+.header-cta {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 22px;
+  border-radius: 0;
+  line-height: 1.25;
+}
+.header-cta span:last-child {
+  font-size: .8rem;
+  opacity: .9;
+}
+
 /* ── logo (mark + wordmark) ─────────────────────────────── */
 
 .logo {
@@ -144,7 +160,16 @@ section { scroll-margin-top: 84px; }
 
 @media (max-width: 860px) {
   .nav-desktop { display: none; }
-  .header-inner .btn { margin-left: auto; }
+  .header-inner { gap: 12px; }
+
+  .header-cta {
+    position: static;
+    height: 100%;
+    margin-right: -20px;
+  }
+  @media (max-width: 360px) {
+    .header-cta { padding: 0 12px; }
+  }
 
   .nav-toggle {
     display: block;
@@ -182,7 +207,7 @@ section { scroll-margin-top: 84px; }
 
   .nav-drop {
     position: absolute;
-    top: 60px;
+    top: 68px;
     right: 16px;
     left: 16px;
     display: flex;
