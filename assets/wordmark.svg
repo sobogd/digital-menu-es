@@ -19,6 +19,6 @@
     <path d="M256 364v26m0 0c-10 14-26 16-38 8m38-8c10 14 26 16 38 8" stroke="#2a1e14" stroke-width="12" stroke-linecap="round" fill="none"/>
   </g>
   <text x="152" y="88" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" font-weight="800" font-size="62" letter-spacing="-1">
-    <tspan fill="#c0562f">QR</tspan><tspan fill="#211a15">gine</tspan>
+    <tspan fill="#c0562f">qr</tspan><tspan fill="#1b4332">gi</tspan>
   </text>
 </svg>

@@ -31,7 +31,7 @@ def logo_svg(size=32):
 
 
 def wordmark():
-    return f'<span class="wordmark"><b>QR</b>{esc(C.BRAND_LATIN[2:])}</span>'
+    return '<span class="wordmark"><b>qr</b><i>gi</i></span>'
 
 
 def head(title, description, path, og_type="website"):
@@ -57,11 +57,10 @@ def org_jsonld():
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "%s",
-  "alternateName": "%s",
   "url": "%s/",
   "logo": "%s/assets/logo.svg",
   "description": "%s"
-}''' % (C.BRAND_LATIN, C.BRAND_RU, C.BASE_URL, C.BASE_URL, esc(C.BRAND_DESC).replace('"', "'"))
+}''' % (C.BRAND_LATIN, C.BASE_URL, C.BASE_URL, esc(C.BRAND_DESC).replace('"', "'"))
 
 
 def breadcrumb_items(items):
@@ -119,8 +118,8 @@ def header():
       <a href="/statyi/">Статьи</a>
       <a href="/ceny/">Цены</a>
       <a href="/faq/">FAQ</a>
-      <a class="btn btn-primary btn-sm" href="{signup}">Попробовать бесплатно</a>
-    </nav>'''.format(signup=C.SIGNUP_URL)
+      <a class="btn btn-primary btn-sm" href="{url}">{label}</a>
+    </nav>'''.format(url=C.CTA["url"], label=C.CTA["label"])
     return f'''<a class="skip" href="#main">К содержанию</a>
 <header class="site-header">
   <div class="wrap header-inner">
@@ -130,9 +129,9 @@ def header():
       {drop}
     </details>
     {nav}
-    <a class="btn btn-primary btn-sm header-cta" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
+    <a class="btn btn-primary btn-sm header-cta" href="{C.CTA['url']}">{C.CTA['label']}</a>
   </div>
-</header>'''
+</header>'''''
 
 
 def footer():
@@ -145,7 +144,7 @@ def footer():
   <div class="wrap footer-grid">
     <div class="footer-brand">
       {logo_svg(40)}{wordmark()}
-      <p>{esc(C.BRAND_TAGLINE)}. Один тариф, всё включено: 14 дней бесплатно, без карты.</p>
+      <p>{esc(C.BRAND_TAGLINE)}. 0 € — до 120 сканов в месяц, 5 € — 1000, 9 € — безлимит.</p>
     </div>
     <nav class="footer-col" aria-label="Функции">
       <h3>Функции</h3>
@@ -172,7 +171,7 @@ def footer():
     </nav>
   </div>
   <div class="wrap footer-bottom">
-    <p>© {C.YEAR} {esc(C.BRAND_LATIN)} · {esc(C.BRAND_RU)}</p>
+    <p>© {C.YEAR} {esc(C.BRAND_LATIN)}</p>
     <nav class="footer-legal" aria-label="Юридическое">{legal}</nav>
   </div>
 </footer>'''
@@ -183,12 +182,11 @@ def breadcrumbs(items):
         f'<a href="{p}/">{esc(n)}</a>' for n, p in items[1:-1] if p
     )
     last = esc(items[-1][0])
+    inner = f'<span class="bc-current">{last}</span>'
     if links:
-        inner = f'{links} <span>/</span> <span class="bc-current">{last}</span>'
-    else:
-        inner = f'<span class="bc-current">{last}</span>'
+        inner = f'{links} <span>/</span> {inner}'
     return f'''<nav class="breadcrumbs" aria-label="Хлебные крошки">
-  <div class="wrap"><a href="/">Главная</a>{" <span>/</span> " if links else ""}{inner}</div>
+  <div class="wrap"><a href="/">Главная</a> <span>/</span> {inner}</div>
 </nav>'''
 
 
@@ -212,10 +210,10 @@ def related_block(pages, h2):
 def cta_band():
     return f'''<section class="final-cta">
   <div class="wrap">
-    <h2>Запустите меню за 14 дней бесплатно</h2>
-    <p>Карта не нужна. Всё включено: QR-меню и бронирование — один тариф.</p>
+    <h2>Меню в QR — бесплатно до 120 сканов в месяц</h2>
+    <p>Все функции — в каждом тарифе. 0 € до 120 сканов, 5 € — 1000, 9 € — безлимит. Для старта карта не нужна.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
+      <a class="btn btn-primary" href="{C.CTA['url']}">{C.CTA['label']}</a>
     </div>
   </div>
 </section>'''

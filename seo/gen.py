@@ -55,6 +55,34 @@ def write(rel, html):
     return rel
 
 
+def plan_cards(btn_url):
+    out = ['<div class="plan-grid">']
+    for p in C.PLANS:
+        cls = "plan" + (" plan--featured" if p.get("featured") else "")
+        tag = f'    <span class="plan-tag">{T.esc(p["tag"])}</span>\n' if p.get("tag") else ""
+        items = "\n".join(f"          <li>{T.esc(i)}</li>" for i in p["items"])
+        out.append(f'''  <div class="{cls}">
+{tag}    <h3>{T.esc(p["name"])}</h3>
+    <p class="plan-price">{T.esc(p["price"])} €<small>/мес</small></p>
+    <p class="plan-alt">{T.esc(p["alt"])}</p>
+    <ul>
+{items}
+    </ul>
+    <a class="btn btn-primary" href="{btn_url}">{C.CTA["label"]}</a>
+  </div>''')
+    out.append("</div>")
+    return "\n".join(out)
+
+
+def plan_offers(url):
+    return [
+        {"@type": "Offer", "name": f"Всё включено: QR-меню + бронирование, {p['name']}",
+         "price": p["price"] + ".00", "priceCurrency": "EUR",
+         "availability": "https://schema.org/InStock", "url": url}
+        for p in C.PLANS
+    ]
+
+
 def render_home():
     d = DATA["__home"]
     path = ""
@@ -75,41 +103,19 @@ def render_home():
     steps = "".join(
         f'<div class="step"><span class="step-num">{i + 1}</span><h3>{esc2(s["h3"])}</h3><p>{esc2(s["p"])}</p></div>'
         for i, s in enumerate(d["steps"]))
-    plan_html = f"""<div class="plan-grid">
-      <div class="plan plan--featured plan--solo">
-        <span class="plan-tag">Всё включено</span>
-        <h3>QR-меню + Бронирование</h3>
-        <p class="plan-price">{esc2(C.PLAN["annual"])} €<small>/мес</small></p>
-        <p class="plan-alt">при годовой оплате · {esc2(C.PLAN["monthly"])} € при помесячной</p>
-        <ul>
-          <li>Меню с фото, аллергенами и 35 языками</li>
-          <li>Бронирование столов из того же QR</li>
-          <li>Обновления без замены QR-кода</li>
-          <li>Ваш логотип и цвета</li>
-        </ul>
-        <a class="btn btn-primary" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
-      </div>
-    </div>"""
+    plan_html = plan_cards(C.CTA["url"])
     offers_html = plan_html
 
     import json as _json
-    app_offer = [
-        {"@type": "Offer", "name": "Всё включено: QR-меню + бронирование, годовая оплата",
-         "price": C.PLAN["annual"].replace(",", "."), "priceCurrency": "EUR",
-         "availability": "https://schema.org/InStock", "url": C.BASE_URL + "/ceny/"},
-        {"@type": "Offer", "name": "Всё включено: QR-меню + бронирование, помесячная оплата",
-         "price": C.PLAN["monthly"].replace(",", "."), "priceCurrency": "EUR",
-         "availability": "https://schema.org/InStock", "url": C.BASE_URL + "/ceny/"},
-    ]
     ld = [
         T.org_jsonld(),
         _json.dumps({"@context": "https://schema.org", "@type": "WebSite",
                      "name": C.BRAND_LATIN, "url": C.BASE_URL + "/"}, ensure_ascii=False),
         _json.dumps({"@context": "https://schema.org", "@type": "SoftwareApplication",
-                     "name": C.BRAND_LATIN, "alternateName": C.BRAND_RU,
+                     "name": C.BRAND_LATIN,
                      "applicationCategory": "BusinessApplication",
                      "operatingSystem": "Web (браузер гостя, без установки)",
-                     "url": C.BASE_URL + "/", "offers": app_offer,
+                     "url": C.BASE_URL + "/", "offers": plan_offers(C.BASE_URL + "/ceny/"),
                      "publisher": {"@type": "Organization", "name": C.BRAND_LATIN},
                      "featureList": ["QR-меню с фото и аллергенами", "AI-перевод на 35 языков",
                                      "Бронирование столов из QR", "Обновление меню без замены QR"],
@@ -135,7 +141,7 @@ def render_home():
         <h1>{esc2(d["h1"])}</h1>
         <p class="lead">{esc2(d["lead"])}</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
+          <a class="btn btn-primary" href="{C.CTA['url']}">{C.CTA['label']}</a>
         </div>
         <p class="hero-note">{esc2(d["hero_note"])}</p>
       </div>
@@ -237,9 +243,9 @@ def render_home():
   <section id="tsenyi" class="pricing">
     <div class="wrap">
       <h2>Цены</h2>
-      <p class="pricing-sub">Один тариф за ресторан — всё включено: QR-меню и бронирование.</p>
+      <p class="pricing-sub">Все тарифы за ресторан — всё включено: QR-меню и бронирование. Разница — только в числе сканов.</p>
       {offers_html}
-      <p class="pricing-note">14 дней бесплатно, карта не нужна. Отмена в любой момент. Всё, что нужно знать о цене, — на странице <a href="/ceny/">«Цены»</a>.</p>
+      <p class="pricing-note">Меньше 120 сканов в месяц — бесплатно, без карты. Отмена в любой момент. Всё про тарифы — на странице <a href="/ceny/">«Цены»</a>.</p>
     </div>
   </section>
 
@@ -274,27 +280,8 @@ def esc2(s):
 def render_ceny():
     d = DATA["__ceny"]
     path = "/ceny"
-    rows_html = f"""<div class="plan-grid">
-      <div class="plan plan--featured plan--solo">
-        <span class="plan-tag">Всё включено</span>
-        <h3>QR-меню + Бронирование</h3>
-        <p class="plan-price">{T.esc(C.PLAN["annual"])} €<small>/мес</small></p>
-        <p class="plan-alt">при годовой оплате · {T.esc(C.PLAN["monthly"])} € при помесячной</p>
-        <ul>
-          <li>Меню с фото, аллергенами и 35 языками</li>
-          <li>Бронирование столов из того же QR</li>
-          <li>Обновления без замены QR-кода</li>
-          <li>Ваш логотип и цвета</li>
-        </ul>
-        <a class="btn btn-primary" href="{C.SIGNUP_URL}">Попробовать бесплатно</a>
-      </div>
-    </div>"""
-    offer = [
-        {"@type": "Offer", "name": "Всё включено: QR-меню + бронирование, годовая оплата",
-         "price": C.PLAN["annual"].replace(",", "."), "priceCurrency": "EUR"},
-        {"@type": "Offer", "name": "Всё включено: QR-меню + бронирование, помесячная оплата",
-         "price": C.PLAN["monthly"].replace(",", "."), "priceCurrency": "EUR"},
-    ]
+    rows_html = plan_cards(C.SIGNUP_URL)
+    offer = plan_offers(C.BASE_URL + "/ceny/")
     import json as _json
     ld = [T.org_jsonld(),
           T.breadcrumb_jsonld([("", ""), ("Цены", "/ceny")]),
@@ -304,8 +291,8 @@ def render_ceny():
                        "name": C.BRAND_LATIN + " — всё включено", "description": d["metaDescription"],
                        "url": C.BASE_URL + "/ceny/", "brand": {"@type": "Brand", "name": C.BRAND_LATIN},
                        "offers": {"@type": "AggregateOffer", "priceCurrency": "EUR",
-                                  "lowPrice": C.PLAN["annual"].replace(",", "."),
-                                  "highPrice": C.PLAN["monthly"].replace(",", "."),
+                                  "lowPrice": min(p["price"] for p in C.PLANS) + ".00",
+                                  "highPrice": max(p["price"] for p in C.PLANS) + ".00",
                                   "offerCount": str(len(offer)), "offers": offer}}, ensure_ascii=False)]
     ld_html = "\n".join(f'<script type="application/ld+json">{x}</script>' for x in ld)
     crumbs_html = T.breadcrumbs([("", ""), ("Цены", "/ceny")])

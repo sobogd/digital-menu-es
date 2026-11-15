@@ -1,12 +1,13 @@
-# digital-menu (QRgine / Коргин)
+# digital-menu (qrgi)
 
 Русскоязычный SEO-лендинг: QR-меню + резервации. Статика, ноль JS.
-Продукт: один тариф, всё включено — 7 €/мес (годовая) / 9 €/мес (помесячная), за ресторан.
-Вход и демо — заглушки (SIGNUP_URL/DEMO_URL в seo/config.py).
+Продукт: три тарифа за ресторан — 0 € до 120 сканов в месяц, 5 € до 1000, 9 € безлимит;
+все функции в каждом, разница только в сканах.
+Вход — заглушка (SIGNUP_URL в seo/config.py), CTA-кнопка «Взять» ведёт на /ceny/.
 
 ## Структура
 
-- `seo/config.py` — бренд, BASE_URL, тариф (PLAN), группы. Смена имени/базы/цены = правка здесь + генерация.
+- `seo/config.py` — бренд, BASE_URL (qr-gi.com), CTA, тарифы (PLANS), группы.
 - `seo/templates.py` — шаблоны (head/header/footer/JSON-LD/страницы).
 - `seo/gen.py` — генератор: `python3 seo/gen.py`
 - `seo/data/**.json` — весь контент: home, ceny, faq, hubs + группы
@@ -20,8 +21,7 @@
 python3 seo/gen.py   # пересобирает все 36 страниц + sitemap + robots
 ```
 
-Список страниц — в `sitemap.xml`. Canonical-базу меняют в `seo/config.py:BASE_URL`
-(сейчас IP:8080; домен qr-gi.com/qrgine.com — решим, одна строка).
+Список страниц — в `sitemap.xml`. Canonical-база — в `seo/config.py:BASE_URL` (qr-gi.com).
 
 ## Деплой
 
