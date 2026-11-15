@@ -108,22 +108,6 @@ section { scroll-margin-top: 84px; }
   height: 64px;
 }
 
-.header-cta {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  flex-direction: column;
-  gap: 2px;
-  padding: 0 22px;
-  border-radius: 0;
-  line-height: 1.25;
-}
-.header-cta span:last-child {
-  font-size: .8rem;
-  opacity: .9;
-}
-
 /* ── logo (mark + wordmark) ─────────────────────────────── */
 
 .logo {
@@ -160,35 +144,26 @@ section { scroll-margin-top: 84px; }
 
 @media (max-width: 860px) {
   .nav-desktop { display: none; }
-  .header-inner { gap: 12px; }
-
-  .header-cta {
-    position: static;
-    height: 100%;
-    margin-right: -20px;
-  }
-  @media (max-width: 360px) {
-    .header-cta { padding: 0 12px; }
-  }
 
   .nav-toggle {
     display: block;
     margin-left: auto;
+    margin-right: -20px;
     position: static;
+    align-self: stretch;
   }
-  .header-inner .btn { margin-left: 0; }
 
   .nav-toggle summary {
     list-style: none;
     cursor: pointer;
-    width: 42px;
-    height: 42px;
+    width: 56px;
+    height: 100%;
     display: grid;
     place-items: center;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: var(--card);
+    background: var(--accent);
+    transition: opacity .15s ease;
   }
+  .nav-toggle summary:hover { opacity: .88; }
   .nav-toggle summary::-webkit-details-marker { display: none; }
 
   .burger,
@@ -199,7 +174,7 @@ section { scroll-margin-top: 84px; }
     width: 18px;
     height: 2px;
     border-radius: 2px;
-    background: var(--ink);
+    background: #fff;
     position: relative;
   }
   .burger::before { position: absolute; top: -6px; }
