@@ -105,13 +105,6 @@ def article_jsonld(title, description, path, body_text):
 
 
 def header():
-    nav = '''<nav class="nav-desktop" aria-label="Основная навигация">
-      <a href="/funktsii/">Функции</a>
-      <a href="/dlya-kogo/">Для кого</a>
-      <a href="/statyi/">Статьи</a>
-      <a href="/ceny/">Цены</a>
-      <a href="/faq/">FAQ</a>
-    </nav>'''
     drop = '''<nav class="nav-drop" aria-label="Основная навигация">
       <a href="/funktsii/">Функции</a>
       <a href="/dlya-kogo/">Для кого</a>
@@ -128,8 +121,6 @@ def header():
       <summary aria-label="Открыть меню"><span class="burger" aria-hidden="true"></span></summary>
       {drop}
     </details>
-    {nav}
-    <a class="btn btn-primary btn-sm header-cta" href="{C.CTA['url']}">{C.CTA['label']}</a>
   </div>
 </header>'''''
 
