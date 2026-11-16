@@ -124,7 +124,6 @@ section { scroll-margin-top: 84px; }
 
 .nav-toggle {
   margin-left: auto;
-  margin-right: -20px;
   align-self: center;
 }
 
@@ -135,12 +134,11 @@ section { scroll-margin-top: 84px; }
   height: 44px;
   display: grid;
   place-items: center;
-  background: var(--accent);
-  border-radius: 12px;
-  transition: opacity .15s ease;
 }
-.nav-toggle summary:hover { opacity: .88; }
 .nav-toggle summary::-webkit-details-marker { display: none; }
+.nav-toggle summary:hover .burger,
+.nav-toggle summary:hover .burger::before,
+.nav-toggle summary:hover .burger::after { background: var(--spark); }
 
 .burger,
 .burger::before,
@@ -150,7 +148,7 @@ section { scroll-margin-top: 84px; }
   width: 18px;
   height: 2px;
   border-radius: 2px;
-  background: #fff;
+  background: var(--ink);
   position: relative;
 }
 .burger::before { position: absolute; top: -6px; }
