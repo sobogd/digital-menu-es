@@ -184,9 +184,8 @@ section { scroll-margin-top: 84px; }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: 48px;
-  align-items: center;
+  grid-template-columns: 1fr;
+  gap: 40px;
 }
 
 .lead {
@@ -202,12 +201,6 @@ section { scroll-margin-top: 84px; }
   margin: 22px 0 12px;
 }
 
-.hero-note {
-  font-size: .85rem;
-  color: var(--ink-soft);
-  margin: 0;
-}
-
 .hero-device {
   display: flex;
   justify-content: center;
@@ -215,7 +208,6 @@ section { scroll-margin-top: 84px; }
 
 @media (max-width: 860px) {
   .hero { padding: 24px 0 32px; }
-  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
 }
 
 /* ── devices (CSS mockups, no images) ────────────────────── */
